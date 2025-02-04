@@ -5,7 +5,7 @@ date = 2025-02-04
 draft = false
 
 [taxonomies]
-tags = ["networks", "youtube","dns",]
+tags = ["networks", "chatgpt","dns",]
 [extra]
 keywords = "YouTube"
 #thumbnail = "ferris-gesture.png"
