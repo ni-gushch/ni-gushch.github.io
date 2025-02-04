@@ -1,16 +1,16 @@
 +++
 title = "ChatGpt без регистрации и МЗТ."
-description = "Способ работы с ИИ без ""дополнительных"" приложений."
+description = "Способ работы с ИИ без \"дополнительных\" приложений."
 date = 2025-02-04
 draft = false
 
 [taxonomies]
-tags = ["youtube","dns",]
+tags = ["networks", "youtube","dns",]
 [extra]
 keywords = "YouTube"
 #thumbnail = "ferris-gesture.png"
 #toc = true
-series = "Сети"
+series = "networks"
 +++
 
 В эпоху бурного развития технологий, расстраиваешься, когда у тебя нет возможности получить доступ к новым программам или сервисам, которые так сильно хотелось испытать.
