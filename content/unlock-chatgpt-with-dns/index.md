@@ -73,23 +73,20 @@ Name:   chatgpt.com
 Address: 2a11:3c00:0:1e::1
 ```
 
-Способ 2: указываем IP прокси-сервера в hosts
-Выполняем DNS-запрос к comss (подставил актуальный на момент написания адрес):
-
-nslookup chatgpt.com 83.220.169.155
-
-В ответ получим:
-
-В строке Addresses находится адрес прокси-сервера, через который идет обращение к ChatGPT. Теперь нам нужно добавить это значение в файл hosts
+В строке Addresses находится адрес прокси-сервера, через который идет обращение к ChatGPT. Теперь нам нужно добавить это значение в файл hosts. Как редактировать этот файл и добавлять связку доменных имен и IP адресов описано в статьях представленных ниже. Для каждой ОС есть отдельная статья:
 
 - [Настройка файла hosts в linux](https://help.reg.ru/support/dns-servery-i-nastroyka-zony/rabota-s-dns-serverami/fayl-hosts-na-linux#0)
 - [Настройка файла hosts в Windows](https://help.reg.ru/support/dns-servery-i-nastroyka-zony/rabota-s-dns-serverami/fayl-hosts-dlya-windows-10)
 - [Настройка файла hosts в MacOs](https://help.reg.ru/support/dns-servery-i-nastroyka-zony/rabota-s-dns-serverami/fayl-hosts-na-macos)
+
+Нам нужно добавить следующие строки в этот файл.
 
 ```text
 94.131.119.85 chatgpt.com
 94.131.119.85 auth.openai.com
 94.131.119.85 chat.openai.com
 ```
+
+Для всех возможных доменов, к которым мы можем обратиться в процессе работы с ChatGpt, прописывается адрес прокси сервера, который мы получили в поле Address
 
 Теперь только тот трафик, который будет направлен на сервера ChatGpt пойдет через отдельный прокси.
