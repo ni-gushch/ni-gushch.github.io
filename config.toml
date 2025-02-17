@@ -157,7 +157,7 @@ bing = "Your Bing Site verification code."
 seo = true  # enable or disable seo-related meta tags: opengraph, facebook, twitter
 #dev = false # development mode, if true then robots.txt should prevent search indexing.
 
-head_extra = <meta name="analytics" content="my-analytics-id" /><meta name="advertising" content="my-advertising-id" /> <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L2SDRTX"></script> <script>  window.dataLayer = window.dataLayer || [];  function gtag(){dataLayer.push(arguments);}  gtag('js\', new Date());  gtag('config', 'G-8T5L2SDRTX'); </script>
+head_extra = "<meta name=\"analytics\" content=\"my-analytics-id\" /><meta name=\"advertising\" content=\"my-advertising-id\" /> <!-- Google tag (gtag.js) --> <script async src=\"https://www.googletagmanager.com/gtag/js?id=G-8T5L2SDRTX\"></script> <script>  window.dataLayer = window.dataLayer || [];  function gtag(){dataLayer.push(arguments);}  gtag('js\\', new Date());  gtag('config', 'G-8T5L2SDRTX'); </script>"
 
 
 ###############################################################################
