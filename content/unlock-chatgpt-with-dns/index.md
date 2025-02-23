@@ -3,6 +3,7 @@ title = "ChatGpt без регистрации и МЗТ."
 description = "Способ работы с ИИ без \"дополнительных\" приложений."
 date = 2025-02-04
 draft = false
+in_search_index = true
 
 [taxonomies]
 tags = ["networks", "chatgpt","dns",]

@@ -3,6 +3,7 @@ title = "Получение сертификатов в k3s (k8s) через cer
 description = "Способ автоматизировать процесс получения сертификатов для локального контура с использованием cert-manager и DNS01 challenge."
 date = 2025-02-12
 draft = false
+in_search_index = true
 
 [taxonomies]
 tags = ["kubernetes", "k3s", "k8s", "certmanager", "letsencrypt"]
@@ -163,22 +164,22 @@ spec:
 Пример `solver` DNS01 для Cloudflare:
 
 ```yaml
-        - dns01:
-          cloudflare:
-            email: xxx
-            apiTokenSecretRef:
-              name: cloudflare-token-secret
-              key: cloudflare-token
+- dns01:
+  cloudflare:
+    email: xxx
+    apiTokenSecretRef:
+      name: cloudflare-token-secret
+      key: cloudflare-token
 ```
 
 Если не хочется заморачиваться с получением сертификата через DNS challenge, то можно использовать HTTP challenge. Для этого в секции `solvers` необходимо прописать следующее:
 
 ```yaml
 - http01:
-        # The ingressClass used to create the necessary ingress routes
-        ingress:
-          serviceType: ClusterIP
-          ingressClassName: traefik
+    # The ingressClass used to create the necessary ingress routes
+    ingress:
+      serviceType: ClusterIP
+      ingressClassName: traefik
 ```
 
 Но следует учесть, что для работы этого способа домен должен быть доступен из внешней сети. Либо необходимо использовать отдельный сервис, который сможет подтвердить право на владение ресурсом.
@@ -205,21 +206,21 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-prod-issuer
 spec:
   rules:
-  - host: portainer.EXAMPLE.COM
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: portainer
-            port:
-              number: 9000
+    - host: portainer.EXAMPLE.COM
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: portainer
+                port:
+                  number: 9000
   ingressClassName: traefik
   tls:
-  - hosts:
-      - portainer.EXAMPLE.COM
-    secretName: portainer-ssl
+    - hosts:
+        - portainer.EXAMPLE.COM
+      secretName: portainer-ssl
 ```
 
 Применяем параметры Ingress:
@@ -228,5 +229,23 @@ spec:
 kubectl apply -f portainer-ingress.yml
 ```
 
-На этом все. После применения настроек Ingress `cert-manager` автоматически их найдет и начнет процесс выдачи сертификата для указанного домена в файле Ingress в секции `tls.hosts`.
+И вишенкой на торте будет файл, который будет перенаправлять все http запросы к ingress на https. Для этого создадим `middleware` файл в папке `home/ms/middlewares` и назовем его `traefik-https-redirect-middleware.yaml`. Теперь наполним содержимое файла следующими строками:
 
+```yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-https
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+```
+
+И применяем конфигурацию
+
+```bash
+kubectl apply -f traefik-https-redirect-middleware.yaml
+```
+
+На этом все. После применения настроек Ingress `cert-manager` автоматически их найдет и начнет процесс выдачи сертификата для указанного домена в файле Ingress в секции `tls.hosts`.
