@@ -7,7 +7,7 @@ draft = false
 in_search_index = true
 
 [taxonomies]
-tags = ["dotnet","csharp","dictionary"]
+tags = ["dotnet","csharp","dictionary", "cs"]
 [extra]
 keywords = "DotNET, C#, Dictionary"
 #thumbnail = "ferris-gesture.png"
@@ -25,7 +25,7 @@ series = "dotnet"
 
 Словарь представляет собой реализацию стандартной хеш-таблицы. Его суть работы состоит в том, чтобы однозначно связать ключ с его значением. И каждый раз когда мы делаем запрос по этому ключу, мы всегда должны получать одно и то же значение. Ключи могут быть как ссылочными, так и значимыми типами. Инициализация происходит либо при создании (если передана начальный размер коллекции), либо при добавлении первого элемента, причем в качестве размера будет выбрано ближайшее простое число. При этом создаются 2 внутренние коллекции — **int[] buckets** и **Entry[] entries**.
 
-```csharp
+```cs
 public class Dictionary<TKey, TValue> :
     IDictionary<TKey, TValue>,
     ICollection<KeyValuePair<TKey, TValue>>,
@@ -54,7 +54,7 @@ public class Dictionary<TKey, TValue> :
 
 Первая будет содержать индексы элементов во второй коллекции, а она, в свою очередь, сами элементы в таком виде:
 
-```csharp
+```cs
     private struct Entry
    {
      public uint hashCode;
@@ -66,7 +66,7 @@ public class Dictionary<TKey, TValue> :
 
 При добавлении элемента вычисляется хэшкод его ключа и затем — индекс корзины в которую он будет добавлен по модулю от величины коллекции. Затем проверяется нет ли уже такого ключа в коллекции, если есть — то операция Add выбросит исключение, а присваивание по индексу просто заменит элемент на новый.
 
-```csharp
+```cs
 // выбросит исключение
 dictionary.Add(10, 20);
 
@@ -78,7 +78,7 @@ dictionary[10] = 20;
 
 Если происходит коллизия (в корзине индексов `_buckets` уже есть элемент), то новый элемент добавляется в коллекцию, его индекс сохраняется в корзине, а индекс старого элемента — в его поле next.
 
-![Пример работы с колизией](image_1.png)
+![Пример работы с колизией](./images/image_1.png)
 
 В результате мы получаем односвязный список относительно дублируемого ключа хеширования. Данный механизм разрешения коллизий называется **chaining**. Чтобы предотвратить такое поведение, необходимо выбирать такой алгоритм в методе `GetHashCode`, который будет давать максимально уникальные значения.
 
@@ -86,7 +86,7 @@ dictionary[10] = 20;
 
 Предположим, необходимо выполнить вставку в словарь какого-либо значения, но перед этим проверить, если ключ уже существует, то вернуть то значение которое уже было записано:
 
-```csharp
+```cs
 if (!dictionary.ContainsKey(key))
 {
     dictionary[key] = value;
@@ -104,7 +104,7 @@ if (!dictionary.ContainsKey(key))
 
 Одним из способов минимизировать эту проблему является использование метода `TryGetValue`:
 
-```csharp
+```cs
 if (!dictionary.TryGetValue(key, out _))
 {
     dictionary[key] = value;
@@ -120,7 +120,7 @@ if (!dictionary.TryGetValue(key, out _))
 
 Как можно упростить работу и сохранить функционал? Для начала можно обернуть двойной доступ в отдельный метод GetOrAdd и там разместить методы по добавлению значения. 
 
-```csharp
+```cs
 
 public static class DictionaryExtensions
 {
@@ -147,7 +147,7 @@ public static class DictionaryExtensions
 
 Да, можно! В современном .NET есть класс `System.Runtime.InteropServices.CollectionsMarshal`, который предоставляет метод `TryGetValueRefOrAddDefault`. Он позволяет получить ссылку на значение по ключу или добавить значение за одно обращение к словарю. Вот пример использования:
 
-```csharp
+```cs
 using System.Runtime.InteropServices;
 
 public static TValue GetOrAdd<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue)
@@ -171,7 +171,7 @@ public static TValue GetOrAdd<TKey, TValue>(this Dictionary<TKey, TValue> dictio
 
 Метод `TryUpdate` позволяет обновить значение по ключу, если ключ уже существует:
 
-```csharp
+```cs
 public static bool TryUpdate<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key, TValue value)
     where TKey : notnull
 {
@@ -190,7 +190,7 @@ public static bool TryUpdate<TKey, TValue>(this Dictionary<TKey, TValue> diction
 
 Позволяет удалить ключ, если он существует.
 
-```csharp
+```cs
 public static bool RemoveIfExists<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key)
     where TKey : notnull
 {
@@ -210,7 +210,7 @@ public static bool RemoveIfExists<TKey, TValue>(this Dictionary<TKey, TValue> di
 
 Позволяет обновить значение, если ключ существует, или добавить новое значение.
 
-```csharp
+```cs
 public static void Upsert<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key, TValue value)
     where TKey : notnull
 {
@@ -229,7 +229,7 @@ public static void Upsert<TKey, TValue>(this Dictionary<TKey, TValue> dictionary
 
 Давайте рассмотрим практический пример использования этих методов:
 
-```csharp
+```cs
 var dictionary = new Dictionary<int, string>();
 dictionary.GetOrAdd(1, "Value1");
 dictionary.TryUpdate(1, "UpdatedValue1");
