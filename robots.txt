@@ -1,0 +1,5 @@
+
+Sitemap: https://baldman.justsquad.su/sitemap.xml
+User-Agent: *
+Allow: /
+Host: https://baldman.justsquad.su
