@@ -7,7 +7,7 @@ draft = false
 in_search_index = true
 
 [taxonomies]
-tags = ["lunix","vps","servers"]
+tags = ["linux", "vps", "servers"]
 [extra]
 keywords = "Linux, VPS"
 #thumbnail = "ferris-gesture.png"
