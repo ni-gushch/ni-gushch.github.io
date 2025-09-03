@@ -1,4 +1,9 @@
-# baldman.github.io
+# [baldman.github.io](https://baldman.justsquad.su/)
+
+[![Build and deploy GH Pages](https://github.com/ni-gushch/ni-gushch.github.io/actions/workflows/gh_pages.yml/badge.svg)](https://github.com/ni-gushch/ni-gushch.github.io/actions/workflows/gh_pages.yml)
+[![pages-build-deployment](https://github.com/ni-gushch/ni-gushch.github.io/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/ni-gushch/ni-gushch.github.io/actions/workflows/pages/pages-build-deployment)
+
+![logo](./img/img_1.png)
 
 Сайт для больших статей, которые не помещаются в формат Telegram.
 
