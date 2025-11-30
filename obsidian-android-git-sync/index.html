@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <script src="https://baldman.justsquad.su/js/theme.min.js" integrity="sha384-pb++s6uBRKaQv+iAXpgA/H3IlpLZdO14tTwuCI7uXmz4aaZdByoCcM+6BhynMq/1"></script>
+  <link rel="stylesheet" href="https://baldman.justsquad.su/abridge.css?h=60f85cd1fde7d35ccdfb" />
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="base" content="https://baldman.justsquad.su" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#333333" />
+  <meta name="msapplication-TileColor" content="#333333" />
+  <link rel="manifest" href="https://baldman.justsquad.su/manifest.min.json" />
+  <link rel="mask-icon" href="https://baldman.justsquad.su/safari-pinned-tab.svg" color="#ff9900" />
+  <link rel="icon" type="image/svg+xml" href="https://baldman.justsquad.su/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="https://baldman.justsquad.su/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="https://baldman.justsquad.su/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="https://baldman.justsquad.su/favicon-16x16.png" />
+  <link rel="alternate" type="application/atom+xml" title="BaldMan Atom Feed" href="https://baldman.justsquad.su/atom.xml" />
+  <meta name="analytics" content="my-analytics-id" /><meta name="advertising" content="my-advertising-id" /> <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L2SDRTX"></script> <script>  window.dataLayer = window.dataLayer || [];  function gtag(){dataLayer.push(arguments);}  gtag('js\', new Date());  gtag('config', 'G-8T5L2SDRTX'); </script> <meta name="yandex-verification" content="b387010222fc81c7" />
+  <meta name="robots" content="index, follow" />
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <title>Obsidian. Git синхронизация на Android. | BaldMan</title>
+  <meta name="author" content="Nikolay Gushcharin" />
+  <meta name="copyright" content="BaldMan" />
+  <meta name="description" content="Способы синхронизации хранилищ Obsidian на Android устройствах через Git." />
+  <link rel="canonical" href="https://baldman.justsquad.su/obsidian-android-git-sync/" />
+  <meta name="keywords" content="Obsidian, Obsidian Git, Obsidian Sync, .NET, C#, Rust, k8s, k3s, Gushcharin, Гущарин, Николай Гущарин, Nikolay Gushcharin, BaldMan" />
+  <meta name="google-site-verification" content="Your Google Site verification code." />
+  <meta name="msvalidate.01" content="Your Bing Site verification code." />
+  <meta property="og:url" content="https://baldman.justsquad.su/obsidian-android-git-sync/" />
+  <meta name="twitter:url" content="https://baldman.justsquad.su/obsidian-android-git-sync/" />
+  <meta property="og:description" content="Способы синхронизации хранилищ Obsidian на Android устройствах через Git." />
+  <meta name="twitter:description" content="Способы синхронизации хранилищ Obsidian на Android устройствах через Git." />
+  <meta property="og:title" content="Obsidian. Git синхронизация на Android. | BaldMan" />
+  <meta name="twitter:title" content="Obsidian. Git синхронизация на Android. | BaldMan" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://baldman.justsquad.su/banner.png" />
+  <meta property="og:image" content="https://baldman.justsquad.su/banner.png" />
+  <meta property="og:site_name" content="BaldMan" />
+  <meta property="og:locale" content="ru_RU" />
+  <meta property="og:type" content="website" />
+  <meta property="og:updated_time" content="2025-02-23" />
+  <meta name="twitter:site" content="@your-user-name" />
+  <meta name="twitter:creator" content="@your-user-name" />
+  <script defer src="https://baldman.justsquad.su/js/abridge.min.js?h=e0f9a881a665c86cce9c" integrity="sha384-QF67y7RnPkuDrJNQqn3/7nYxqxWkW/qHI7zN0WTES1aXbf+TotoByRBb835fUE6U"></script>
+  <script defer src="https://baldman.justsquad.su/js/lunr.stemmer.support.min.js" integrity="sha384-f0MKdC/9ZSGTpDiuWusC0SbLXNCBp6NgzDZpjR/4UdHXAQBqvTEKyinnsa1wQ7oA"></script>
+  <script defer src="https://baldman.justsquad.su/js/lunr.ru.min.js" integrity="sha384-R9oqgx8XLmQUPG/odEJyFPd90/TbRU0/6q+If/f8d5yDqLhZgtOT5/X9r3O1Etjr"></script>
+  <noscript><link rel="stylesheet" href="https://baldman.justsquad.su/nojs.css" /></noscript>
+</head>
+<body>
+  <header>
+    <nav>
+      <div><big><a href="https://baldman.justsquad.su" title="BaldMan"><img src="https://baldman.justsquad.su/logo.svg" alt="BaldManLogo" width="128" height="128" />BaldMan</a></big></div>
+      <div>
+
+        <div>
+          <ul><li><a class="s110" href="https://baldman.justsquad.su/archive/"> Архив </a></li><li><a class="s110" href="https://baldman.justsquad.su/tags/"> Теги </a></li><li><i type="reset" id="mode" class="js svgs adjust"></i></ul>
+        </div>
+
+        <div>
+          <div>
+            <form autocomplete=off class="js" name="goSearch" id="searchbox">
+              <div class="searchd">
+                <input id="searchinput" type="text" placeholder="Поиск" title="Search" />
+                <button type="submit" title="Search" class="svgs svgm search"></button>
+              </div>
+              <div class="results"><div id="suggestions"></div></div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </nav>
+    <hr />
+  </header>
+  <main>
+    <article>
+      <h1><a href="https://baldman.justsquad.su/obsidian-android-git-sync/">Obsidian. Git синхронизация на Android.</a></h1>
+
+      <span class="s95"> Nikolay Gushcharin <span class="rpad"></span> августа 18, 2024 <span class="rpad"></span>Изменено: февраля 23, 2025 <span class="rpad"></span> #<a href="https://baldman.justsquad.su/tags/obsidian/">obsidian</a>  #<a href="https://baldman.justsquad.su/tags/git/">git</a> </span>
+
+    
+        <div class="block">
+      <div class="blockdiv">
+        <a class="b s150" href="https://baldman.justsquad.su/tags/obsidian/">obsidian (Series)</a><br>
+            <a class="scur" href="https://baldman.justsquad.su/obsidian-android-git-sync/">Obsidian. Git синхронизация на Android.</a><br> 
+          
+      </div>
+    </div>
+
+
+<p><strong>Obsidian</strong> — очень удобный инструмент для работы с заметками разного рода. Можно составлять просто список дел на день, а некоторые люди пишут сценарии или наброски книг.</p>
+<p>Но при его использовании встаёт вопрос о синхронизации данных. Конечно, можно использовать функционал облака от разработчиков Obsidian, но иногда хочется получить независимость от "корпораций". И <strong>Obsidian</strong> может предоставить такой вариант.</p>
+<p>Есть два способа: установить локальный сервер синхронизации, который использует CouchDB, либо можно воспользоваться системой контроля версий Git.</p>
+<p>В этой статье пойдёт речь о том, как реализовать синхронизацию хранилища через Git на Android устройствах.</p>
+<h2 id="podgotovitel-nyi-etap">Подготовительный этап</h2>
+<p>Для реализации любого способа нам обязательно нужен репозиторий, в котором будут храниться все документы. Для этого заходим туда, где будем создавать репозиторий (GitLab, GitHub...), логинимся и создаём пустой приватный репозиторий. Чтобы автоматически создалась ветка, можно сразу добавить в репозиторий файл <code>.gitignore</code>.</p>
+<p><img src="https://baldman.justsquad.su/obsidian-android-git-sync/./images/img_1.jpg" alt="github_repo" /></p>
+<p>Далее нам нужно как-то клонировать этот репозиторий на Android устройство. Так как встроенной поддержки командной строки в Android нет, придётся воспользоваться сторонним приложением, которое будет эмулировать работу командной строки Unix-системы.</p>
+<h3 id="ustanovka-termux-i-nastroika-git">Установка Termux и настройка Git</h3>
+<p><strong>Termux</strong> — приложение с открытым исходным кодом, которое предназначено для эмуляции командной строки Linux с поддержкой пакетного менеджера. Скачать это приложение можно как из <a rel="noopener" target="_blank" href="https://play.google.com/store/apps/details?id=com.termux&amp;hl=ru">Google Play</a>, так и из альтернативного магазина <a rel="noopener" target="_blank" href="https://f-droid.org/packages/com.termux/">F-Droid</a>, в котором содержатся только приложения с открытым исходным кодом. За дополнительной информацией можно обратиться на их официальную <a rel="noopener" target="_blank" href="https://wiki.termux.com/wiki/Installation">Wiki страничку</a>.</p>
+<p>Теперь запускаем приложение и начинаем устанавливать необходимые пакеты.</p>
+<pre data-lang="sh" class="language-sh z-code"><code class="language-sh" data-lang="sh"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">pkg</span></span><span class="z-meta z-function-call z-arguments z-shell"> update</span> <span class="z-keyword z-operator z-logical z-and z-shell">&amp;&amp;</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">pkg</span></span><span class="z-meta z-function-call z-arguments z-shell"> upgrade<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>y</span></span> <span class="z-keyword z-operator z-logical z-and z-shell">&amp;&amp;</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">pkg</span></span><span class="z-meta z-function-call z-arguments z-shell"> install<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>y</span> git openssh termux-api</span>
+</span></code></pre>
+<p>Теперь определим, в какой папке будут расположены репозитории Vaults. Для примера создадим папку <code>repos</code> в папке <code>Documents</code>.</p>
+<pre data-lang="sh" class="language-sh z-code"><code class="language-sh" data-lang="sh"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">mkdir</span></span><span class="z-meta z-function-call z-arguments z-shell"> <span class="z-meta z-group z-expansion z-tilde"><span class="z-variable z-language z-tilde z-shell">~</span></span>/storage/shared/Documents/repos <span class="z-punctuation z-separator z-continuation z-line z-shell">\
+</span></span></span><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-arguments z-shell">mkdir <span class="z-meta z-group z-expansion z-tilde"><span class="z-variable z-language z-tilde z-shell">~</span></span>/storage/shared/Documents/repos/obsidian/</span>
+</span><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-support z-function z-cd z-shell">cd</span></span><span class="z-meta z-function-call z-arguments z-shell"> <span class="z-meta z-group z-expansion z-tilde"><span class="z-variable z-language z-tilde z-shell">~</span></span>/storage/shared/Documents/repos/obsidian</span>
+</span></code></pre>
+<p>Теперь нам нужно клонировать репозиторий в созданную папку.</p>
+<p>Если бы у нас репозиторий был публичный, проблем бы не было. Но у нас он приватный, и чтобы клонировать его, нужно пройти авторизацию.</p>
+<p>Для GitHub можно воспользоваться их фирменным CLI-приложением <code>gh</code>. Чтобы его установить, нужно выполнить команду:</p>
+<pre data-lang="sh" class="language-sh z-code"><code class="language-sh" data-lang="sh"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">apt</span></span><span class="z-meta z-function-call z-arguments z-shell"> install gh</span>
+</span></code></pre>
+<p>Для авторизации на сайте можно использовать:</p>
+<pre data-lang="sh" class="language-sh z-code"><code class="language-sh" data-lang="sh"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">gh</span></span><span class="z-meta z-function-call z-arguments z-shell"> login</span>
+</span></code></pre>
+<p>Нужно будет выбрать способ прохождения авторизации. Я обычно выбираю через браузер... после выбора параметров вас перебросит в браузер, где нужно будет ввести дополнительно код, сгенерированный в консоли.</p>
+<p>После подключения можно будет получить ссылку такого вида:</p>
+<p><img src="https://baldman.justsquad.su/obsidian-android-git-sync/./images/img_2.jpg" alt="repo_link" /></p>
+<p>И, выполнив её в консоли Termux, репозиторий будет клонирован в ту папку, в которой мы сейчас находимся.</p>
+<pre data-lang="sh" class="language-sh z-code"><code class="language-sh" data-lang="sh"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">gh</span></span><span class="z-meta z-function-call z-arguments z-shell"> repo clone <span class="z-keyword z-operator z-assignment z-redirection z-shell">&lt;</span>repo-link<span class="z-keyword z-operator z-assignment z-redirection z-shell">&gt;</span>
+</span></span></code></pre>
+<h3 id="dobavlenie-khranilishcha-v-obsidian">Добавление хранилища в Obsidian</h3>
+<p>После клонирования репозитория мы можем добавить эту папку как хранилище в Obsidian.</p>
+<p>Если вы только скачали само приложение, на стартовом экране у вас появится кнопка "Выбор папки для хранилища". Нажав её, укажите ту папку, которая была создана в результате клонирования репозитория.</p>
+<p>Теперь все добавляемые файлы будут индексироваться <code>git</code>, и их можно отправлять в удалённый репозиторий.</p>
+<p>С подготовительным этапом закончили. Теперь рассмотрим способы именно синхронизации.</p>
+<h2 id="ispol-zovanie-rasshireniia-git">Использование расширения Git</h2>
+<p>Самый простой способ. Он работает на любом устройстве, но разработчики пишут, что на мобильных устройствах может работать крайне нестабильно. Потому что расширение не может использовать нативные команды Git CLI, а использует библиотеку JavaScript, которая каким-то образом тоже умеет работать с Git.</p>
+<p>У меня получилось запустить его не с первого раза. Но после удачной попытки настроить синхронизацию через командную строку, расширение заработало. Я думаю, что это было просто совпадение. Давайте пройдём по шагам.</p>
+<h3 id="ustanovka-rasshireniia">Установка расширения</h3>
+<p>Плагин разрабатывается сообществом, и поэтому его нет в составе <code>CorePlugins</code>. Нужно сначала включить поддержку <code>Community plugins</code>. Для этого нажмите на шестерёнку в правом верхнем углу меню.</p>
+<p><img src="https://baldman.justsquad.su/obsidian-android-git-sync/./images/img_3.jpg" alt="obs-1" /></p>
+<p>После включаем поддержку <code>Community plugins</code>, как показано на рисунке.</p>
+<p><img src="https://baldman.justsquad.su/obsidian-android-git-sync/./images/img_5.png" alt="obs-2" /></p>
+<p>Далее нажимаем на просмотр списка доступных расширений.</p>
+<p><img src="https://baldman.justsquad.su/obsidian-android-git-sync/./images/img_6.png" alt="obs-3" /></p>
+<p>И ищем среди списка расширение с названием <code>Git</code>.</p>
+<p><img src="https://baldman.justsquad.su/obsidian-android-git-sync/./images/img_7.png" alt="obs-4" /></p>
+<p>Нажимаем на это расширение -&gt; Установить -&gt; Активировать. Кнопка активировать будет там, где на картинке кнопка "отключить".</p>
+<p><img src="https://baldman.justsquad.su/obsidian-android-git-sync/./images/img_8.png" alt="obs-5" /></p>
+<p>Далее переходим в настройки плагина. Я установил время автоматического обновления репозитория: коммит изменений каждые 2 минуты, проверка обновлений каждые 5 минут. Так как мы всё-таки работаем одновременно на одном устройстве, не обязательно делать мгновенное обновление.</p>
+<p><img src="https://baldman.justsquad.su/obsidian-android-git-sync/./images/img_9.png" alt="obs-5" /></p>
+<p>Включаем проверку обновления при старте приложения, Push изменений после локальной фиксации и обновление локального репозитория перед отправкой в удалённый (Pull before Push).</p>
+<p><img src="https://baldman.justsquad.su/obsidian-android-git-sync/./images/img_10.png" alt="obs-6" /></p>
+<p>Также обязательно нужно ввести свой логин, пароль (Public Access Token для GitHub, его можно получить в настройках пользователя GitHub). А также обязательно вводим имя пользователя и почту для пользователя Git.</p>
+<p><img src="https://baldman.justsquad.su/obsidian-android-git-sync/./images/img_11.png" alt="obs-7" /></p>
+<p>Теперь у вас будет автоматически обновляться репозиторий хранилища. Вы можете заметить, что будут автоматически появляться всплывающие окна с описанием действия синхронизации.</p>
+<h2 id="ispol-zovanie-termux-emuliatora">Использование Termux эмулятора</h2>
+<p>Для реализации этого подхода у нас почти всё готово. Единственное, что нужно сделать, — это прописать имя пользователя и адрес электронной почты, а также настроить SSH-ключ для синхронизации. Заходим в приложение Termux и запускаем команды:</p>
+<pre data-lang="sh" class="language-sh z-code"><code class="language-sh" data-lang="sh"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> config<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> --</span>global</span> user.name <span class="z-keyword z-operator z-assignment z-redirection z-shell">&lt;</span>name<span class="z-keyword z-operator z-assignment z-redirection z-shell">&gt;</span>
+</span></span><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> config<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> --</span>global</span> user.email <span class="z-keyword z-operator z-assignment z-redirection z-shell">&lt;</span>email<span class="z-keyword z-operator z-assignment z-redirection z-shell">&gt;</span>
+</span></span></code></pre>
+<p>Чтобы получить SSH-ключ, пропишем в командной строке:</p>
+<pre data-lang="sh" class="language-sh z-code"><code class="language-sh" data-lang="sh"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">cat</span></span><span class="z-meta z-function-call z-arguments z-shell"> <span class="z-meta z-group z-expansion z-tilde"><span class="z-variable z-language z-tilde z-shell">~</span></span>/.ssh/id_rsa.pub</span>
+</span></code></pre>
+<p>Скопируйте то, что вывелось в результате команды, идите в настройки пользователя GitHub или другого репозитория и добавьте SSH-ключ авторизации.</p>
+<p>Минус этого подхода в том, что тут не будет никакой автоматики, и придётся прописывать все команды вручную. Но зато всё будет точно работать :D</p>
+<p>Заходим в папку, где находится наше хранилище:</p>
+<pre data-lang="sh" class="language-sh z-code"><code class="language-sh" data-lang="sh"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-support z-function z-cd z-shell">cd</span></span><span class="z-meta z-function-call z-arguments z-shell"> <span class="z-meta z-group z-expansion z-tilde"><span class="z-variable z-language z-tilde z-shell">~</span></span>/storage/Documents/repos/obsidian/my-obsidian-vault-repo</span>
+</span></code></pre>
+<p>Обновляем индекс удалённого репозитория:</p>
+<pre data-lang="sh" class="language-sh z-code"><code class="language-sh" data-lang="sh"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> fetch<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> --</span>prune</span></span>
+</span><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> pull</span>
+</span></code></pre>
+<blockquote>
+<p>Заметка: чтобы постоянно не использовать <code>prune</code> для очистки локального индекса, можно использовать глобальную настройку:</p>
+<pre data-lang="sh" class="language-sh z-code"><code class="language-sh" data-lang="sh"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> config remote.origin.prune true</span>
+</span></code></pre>
+</blockquote>
+<p>После синхронизации локальной копии с удалённой и добавления новых файлов можно отправить эти изменения в удалённый репозиторий. Для этого выполним следующее:</p>
+<pre data-lang="sh" class="language-sh z-code"><code class="language-sh" data-lang="sh"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> add .</span>
+</span><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> commit<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>m</span> <span class="z-keyword z-operator z-assignment z-redirection z-shell">&lt;</span>message<span class="z-keyword z-operator z-assignment z-redirection z-shell">&gt;</span>
+</span></span><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> push</span>
+</span></code></pre>
+<p>Вот так вручную можно обновлять данные в удалённом репозитории. Но этот способ не такой удобный. Давайте попробуем его улучшить.</p>
+<h2 id="ispol-zovanie-termux-i-otdel-nogo-planirovshchika-tasker">Использование Termux и отдельного планировщика Tasker</h2>
+<p>Если вы выполняли пункты, описанные ранее, то можно начать вот <a rel="noopener" target="_blank" href="https://github.com/DovieW/obsidian-android-sync/blob/master/README.md">ЭТУ</a> инструкцию с 7 шага, раздела <strong>Termux Setup</strong>.</p>
+<p>Только в нашей ситуации папка, в которую будет клонирован скрипт, будет чуть другой:</p>
+<pre data-lang="sh" class="language-sh z-code"><code class="language-sh" data-lang="sh"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> clone https://github.com/DovieW/obsidian-android-sync.git <span class="z-meta z-group z-expansion z-tilde"><span class="z-variable z-language z-tilde z-shell">~</span></span>/storage/shared/Documents/repos/obsidian/obsidian-android-sync</span>
+</span></code></pre>
+<p><strong>Плюс</strong> этого метода — потенциальная автоматизация, если правильно пройти все настройки. Если же не получится поработать с приложением Tasker, то останется скрипт, который можно вызывать для синхронизации хранилища.</p>
+<pre data-lang="sh" class="language-sh z-code"><code class="language-sh" data-lang="sh"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">./sync-vaults.sh</span></span>
+</span></code></pre>
+<p>Этот скрипт автоматически подтянет изменения из удалённого репозитория, сделает коммит и отправит его в удалённый репозиторий.</p>
+<p><strong>Минус</strong> этого подхода — приложение <strong>Tasker</strong> — ПЛАТНОЕ!!! А зачем нам использовать синхронизацию собственными руками, да ещё и платить за приложение? Но если оно уже у вас есть, то этот способ для вас.</p>
+<h2 id="ispol-zovanie-termux-i-planirovshchika-cron">Использование Termux и планировщика cron</h2>
+<p>Есть ещё один способ, который просто является альтернативой для предыдущего. В этом варианте мы заменяем приложение Tasker на возможности cron scheduler. Запускать и управлять им можно прямо в самом <strong>Termux</strong>.</p>
+<p>Для реализации такого подхода можно воспользоваться <a rel="noopener" target="_blank" href="https://www.reddit.com/r/ObsidianMD/comments/qep4gn/guide_obsidian_vault_github_sync_cron_on_termux/">этой инструкцией</a>. Но в качестве скрипта можно использовать тот, который мы получили в результате предыдущего способа.</p>
+<p>С помощью cron можно очень гибко настроить время синхронизации.</p>
+<p>На этом всё. Мы рассмотрели несколько способов реализации синхронизации хранилища через Git-репозиторий.</p>
+<p>Если остались вопросы, то можно задать их под постами в <a rel="noopener" target="_blank" href="https://t.me/bald_man_gushcharin">tg канале</a>.</p>
+
+      <nav>
+        <div>
+          <a href="https://baldman.justsquad.su/unlock-chatgpt-with-dns/">&#8249; ChatGpt без регистрации и МЗТ.</a>
+        </div>
+        <div>
+        </div>
+      </nav>
+    </article>
+
+    <div class="sblock">
+      <div class="blockdiv">
+        <a class="b s150" href="https://baldman.justsquad.su/tags/obsidian/">Series</a><br>
+            
+      <a class="scur" href="https://baldman.justsquad.su/obsidian-android-git-sync/">Obsidian. Git синхронизация на Android.</a><br>
+    
+      </div>
+  </main>
+  <footer>
+    <div class="c">
+      <nav class="tpad"><div><a class="js m-protected" href="#bmlrb2xhaWd1c2hhcmluQHlhLnJ1" target="_blank" title="Mail"><i type="Button" class="svg mail" title="Mail"></i></a><a href="https://github.com/ni-gushch/" target="_blank" title="Github"><i type="Button" class="svg github" title="Github"></i></a><a href="https://www.youtube.com/@baldman_g" target="_blank" title="YouTube"><i type="Button" class="svg youtube" title="YouTube"></i></a><a href="https://t.me/bald_man_g/" target="_blank" title="Telegram"><i type="Button" class="svg telegram" title="Telegram"></i></a></div></nav>
+      <nav class="vpad">
+        <a class="rpad s90" href="https://baldman.justsquad.su/about/"> Обо мне </a>
+        <a class="rpad s90" href="https://baldman.justsquad.su/contact/"> Контакты </a>
+        <a class="rpad s90" href="https://baldman.justsquad.su/sitemap.xml" target="_blank"> Карта сайта </a>
+      </nav>
+      <p class="s80"> &copy; <span id="year">2025</span> BaldMan</p>
+      <p class="s80">Работает на <a href="https://www.getzola.org/" target="_blank">Zola</a> и <a href="https://github.com/jieiku/abridge/" target="_blank">Abridge</a></p>
+    </div>
+  </footer><span class="topout">
+<span class="topleft"> </span><a href="#" class="top" title="Back to Top"><i class="svgs svgh angu"></i></a>
+</span>
+</body>
+</html>
