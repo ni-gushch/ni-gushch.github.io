@@ -7,7 +7,7 @@ base_url = "https://baldman.justsquad.su"
 title = "BaldMan"
 #for SEO aim for 140-180 Characters
 description = "Блог Николая Гущарина. Здесь можно найти статьи по .NET, создание системы умного дома, а так же про интересные инструменты для разработки."
-theme = "abridge"
+theme = "tabi"
 
 default_language = "ru"
 compile_sass = true
